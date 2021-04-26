@@ -32,6 +32,22 @@ class DBManager
 
     return $result;
 	}
+
+  public function getUsers(){
+		$stmt = $this->con->prepare("SELECT id, nombre, apellido FROM usuarios");
+		$stmt->execute();
+		$stmt->bind_result($id, $nombre, $apellido);
+		$users = array();
+
+		while($stmt->fetch()){
+			$temp = array();
+			$temp['id'] = $id;
+			$temp['nombre'] = $nombre;
+			$temp['apellido'] = $apellido;
+			array_push($users, $temp);
+		}
+		return $users;
+	}
 }
 
 

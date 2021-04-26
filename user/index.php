@@ -31,7 +31,18 @@
 					$response['error'] = true;
 					$response['message'] = 'Faltan párametros requeridos';
 				}
-			break;		
+			break;
+			case 'getUsers':
+				$db = new DBManager();
+				$users = $db->getUsers();
+				if(count($users)<=0){
+					$response['error'] = true;
+					$response['message'] = 'No hay usuarios en BD';
+				}else{
+					$response['error'] = false;
+					$response['users'] = $users;
+				}
+			break;
 			default:
 				$response['error'] = true;
 				$response['message'] = 'No hay proceso';
